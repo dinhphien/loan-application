@@ -19,7 +19,6 @@ services:
     volumes:
       - ../:/mnt/code
       - ./php-fpm/custom-xdebug.ini:/usr/local/etc/php/conf.d/custom-xdebug.ini
-      - ./php-fpm/service.ini:/mnt/config/service.ini
 
   db:
     image: mysql:8.0

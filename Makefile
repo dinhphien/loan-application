@@ -11,7 +11,13 @@ RUN_IN_CONTAINER_BASH = $(RUN_IN_CONTAINER) sh -c
 ############################################################################################################
 ###	Start / Down / Rebuild Section
 ############################################################################################################
-install: composer_install
+install: create_configuration generate_key composer_install
+
+create_configuration:
+	test -f .env || cp .env.example .env
+
+generate_key:
+	$(RUN_IN_CONTAINER) php artisan key:generate
 
 startup: down
 	docker-compose -p ${PROJECT_NAME} -f docker/docker-compose.yml up -d
