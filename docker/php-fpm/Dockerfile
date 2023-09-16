@@ -23,6 +23,9 @@ FROM build-base AS build-dev
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
+# update user www-data with userid = 1000
+RUN usermod -u 1000 www-data
+
 COPY docker/php-fpm/custom-xdebug.ini /usr/local/etc/php/conf.d/custom-xdebug.ini
 COPY docker/php-fpm/custom-php.ini /usr/local/etc/php/conf.d/custom-php.ini
 

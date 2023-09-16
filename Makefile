@@ -14,7 +14,7 @@ RUN_IN_CONTAINER_BASH = $(RUN_IN_CONTAINER) sh -c
 ############################################################################################################
 ###	Start / Down / Rebuild Section
 ############################################################################################################
-install: create_configuration generate_key composer_install
+install: create_configuration composer_install generate_key
 
 create_configuration:
 	test -f .env || cp .env.example .env
