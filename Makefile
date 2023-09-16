@@ -1,3 +1,6 @@
+
+export HOST_USER_ID=$(shell id -u)
+
 PROJECT_NAME=loan-application
 PHPUNIT=vendor/bin/phpunit
 PHPCS=vendor/bin/phpcs
@@ -5,7 +8,7 @@ PHPCBF=vendor/bin/phpcbf
 PHPSTAN=vendor/bin/phpstan
 
 COMPOSE_FILE = docker/docker-compose.yml
-RUN_IN_CONTAINER = docker-compose -p $(PROJECT_NAME) -f $(COMPOSE_FILE) run --rm app
+RUN_IN_CONTAINER = docker-compose -p $(PROJECT_NAME) -f $(COMPOSE_FILE) run --rm -e HOST_USER_ID=$(HOST_USER_ID) app
 RUN_IN_CONTAINER_BASH = $(RUN_IN_CONTAINER) sh -c
 
 ############################################################################################################
