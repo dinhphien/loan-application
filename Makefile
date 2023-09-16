@@ -3,12 +3,11 @@ export HOST_USER_ID=$(shell id -u)
 
 PROJECT_NAME=loan-application
 PHPUNIT=vendor/bin/phpunit
-PHPCS=vendor/bin/phpcs
-PHPCBF=vendor/bin/phpcbf
 PHPSTAN=vendor/bin/phpstan
+PINT=vendor/bin/pint
 
 COMPOSE_FILE = docker/docker-compose.yml
-RUN_IN_CONTAINER = docker-compose -p $(PROJECT_NAME) -f $(COMPOSE_FILE) run --rm -e HOST_USER_ID=$(HOST_USER_ID) app
+RUN_IN_CONTAINER = docker-compose -p $(PROJECT_NAME) -f $(COMPOSE_FILE) run --rm app
 RUN_IN_CONTAINER_BASH = $(RUN_IN_CONTAINER) sh -c
 
 ############################################################################################################
@@ -22,11 +21,16 @@ create_configuration:
 generate_key:
 	$(RUN_IN_CONTAINER) php artisan key:generate
 
-startup: down
-	docker-compose -p ${PROJECT_NAME} -f docker/docker-compose.yml up -d
+migrate:
+	$(RUN_IN_CONTAINER) php artisan migrate
+
+startup: down up migrate
 
 startup-not-detached: down
 	docker-compose -p ${PROJECT_NAME} -f docker/docker-compose.yml up
+
+up:
+	docker-compose -p ${PROJECT_NAME} -f docker/docker-compose.yml up -d
 
 down:
 	docker-compose -p ${PROJECT_NAME} -f docker/docker-compose.yml down -v --remove-orphans
@@ -57,26 +61,17 @@ composer_no_dev:
 ### Testing
 ############################################################################################################
 
-test_unit: composer_autoload
+tests: composer_autoload
 	@echo ""
-	@echo "+++ Run unit tests (with coverage) +++"
-	$(RUN_IN_CONTAINER) php $(PHPUNIT) -c tests/unit/config/phpunit.xml $(ARGS)
-
-test_integration: composer_autoload
-	@echo ""
-	@echo "+++ Run integration tests +++"
-	docker-compose -p $(PROJECT_NAME) -f $(COMPOSE_FILE) down
-	$(RUN_IN_CONTAINER) php $(PHPUNIT) -c tests/integration/config/phpunit.xml $(ARGS)
+	@echo "+++ Run unit tests +++"
+	$(RUN_IN_CONTAINER) php $(PHPUNIT) -c phpunit.xml $(ARGS)
 
 phpstan:
-	$(RUN_IN_CONTAINER) $(PHPSTAN) analyze -c tests/phpstan.neon --xdebug
+	$(RUN_IN_CONTAINER) $(PHPSTAN) analyze -c phpstan.neon --xdebug
 
-sniff:
-	@echo ""
-	@echo "+++ Run code sniffer +++"
-	$(RUN_IN_CONTAINER) $(PHPCS)  --runtime-set ignore_warnings_on_exit true --extensions=php -p -n --encoding=UTF-8 --standard=tests/phpcs-ruleset.xml src/ tests/unit/ tests/integration
+pint_test:
+	$(RUN_IN_CONTAINER) $(PINT) app --test
 
-phpcbf:
-	@echo "+++ Run phpcbf to fix formatting"
-	$(RUN_IN_CONTAINER) $(PHPCBF) --standard=tests/phpcs-ruleset.xml src/ tests/
+pint:
+	$(RUN_IN_CONTAINER) $(PINT) app
 
