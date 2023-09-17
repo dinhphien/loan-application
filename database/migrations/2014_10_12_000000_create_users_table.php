@@ -1,7 +1,10 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -18,6 +21,23 @@ return new class extends Migration
             $table->string('password');
             $table->timestamps();
         });
+
+        DB::table('users')->insert([
+            [
+                'username' => 'admin@gmail.com',
+                'is_admin' => true,
+                'password' => Hash::make('admin'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'username' => 'phien@gmail.com',
+                'is_admin' => false,
+                'password' => Hash::make('phien'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+        ]);
     }
 
     /**

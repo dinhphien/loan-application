@@ -67,7 +67,7 @@ tests: composer_autoload
 	$(RUN_IN_CONTAINER) php $(PHPUNIT) -c phpunit.xml $(ARGS)
 
 phpstan:
-	$(RUN_IN_CONTAINER) $(PHPSTAN) analyze -c phpstan.neon --xdebug
+	$(RUN_IN_CONTAINER) $(PHPSTAN) analyze -c phpstan.neon --memory-limit=1G
 
 pint_test:
 	$(RUN_IN_CONTAINER) $(PINT) app --test
