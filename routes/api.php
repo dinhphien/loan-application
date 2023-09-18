@@ -31,7 +31,7 @@ Route::group([
     'middleware' => 'auth:api'
 ], function (){
     Route::post('/loans', CreateLoanController::class);
-    Route::post('/loans/{loanId}', ApproveLoanController::class)->where('loanId', '[0-9]+');
+    Route::post('/loans/{loanId}/approve', ApproveLoanController::class)->where('loanId', '[0-9]+');
     Route::get('/loans/{loanId}', ViewLoanController::class)->where('loanId', '[0-9]+');
 
     Route::post('repayments/{repaymentId}', AddRepaymentController::class)
