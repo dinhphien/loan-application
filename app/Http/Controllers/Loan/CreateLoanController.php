@@ -20,11 +20,11 @@ class CreateLoanController extends Controller
     public function __invoke(CreateLoanRequest $request): JsonResponse
     {
         $term = Term::fromNumberOfWeek(
-            $request->validated('term')
+            (int) $request->validated('term')
         );
 
         $money = Money::fromAmount(
-            $request->validated('amount')
+            (float) $request->validated('amount')
         );
 
         $loan = $this->loanService->init($money, $term);
@@ -32,7 +32,7 @@ class CreateLoanController extends Controller
         return new JsonResponse(
             [
                 'message' => 'Loan created successfully',
-                'user' => $loan,
+                'loan' => $loan,
             ]
         );
 

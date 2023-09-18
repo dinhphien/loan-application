@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('repayments', function (Blueprint $table) {
             $table->id();
-            $table->float('amount', 8, 2);
+            $table->decimal('amount', 20, 2);
             $table->dateTime('deadline');
             $table->string('status', 100);
             $table->foreignId('user_id');
