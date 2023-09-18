@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "989a5357-0c21-4b8d-b060-ca214337c925",
+		"name": "Loan Application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "17498819"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "dinhquyphien1997@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "phien",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8088/api/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							],
+							"query": [
+								{
+									"key": "XDEBUG_SESSION_START",
+									"value": "PHPSTORM",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "admin@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8088/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							],
+							"query": [
+								{
+									"key": "XDEBUG_SESSION_START",
+									"value": "PHPSTORM",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODgvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2OTQ4NTE1NDMsImV4cCI6MTY5NDkzNzk0MywibmJmIjoxNjk0ODUxNTQzLCJqdGkiOiJVTU53UmlubUE5QUxYazg5Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.ZwSIwlfjQuzNL2gfTmnJS2XS_yMSypCaobHjI8JxQnw"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8088/api/auth/logout"
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODgvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2OTQ4NTIyMDEsImV4cCI6MTY5NDkzODYwMSwibmJmIjoxNjk0ODUyMjAxLCJqdGkiOiJyQnVrR3pXTVA2b2FONERhIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.569MpV7cAOaHtzFxG3FZl1DmJj9KbFZLasOC9emaQ7A"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8088/api/auth/refresh"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Loan",
+			"item": [
+				{
+					"name": "Create Loan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODgvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2OTQ5NTUyNTIsImV4cCI6MTY5NTA0MTY1MiwibmJmIjoxNjk0OTU1MjUyLCJqdGkiOiJFYldXVWtmNGZLNGhrOGxEIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.d_clCuaMm5iH9mYHVc6L8Mt02CLjRTHRbMHq9tZQOlY"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "amount",
+									"value": "100000",
+									"type": "text"
+								},
+								{
+									"key": "term",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost:8088/api/loans"
+					},
+					"response": []
+				},
+				{
+					"name": "Approve Loan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODgvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2OTQ5NjUyMzYsImV4cCI6MTY5NTA1MTYzNiwibmJmIjoxNjk0OTY1MjM2LCJqdGkiOiIwV0lQUzlJVUxWR3A5T2paIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.MgNQXxYGhLoABbXJlTjQh-WzRZe2_nfMzluUqd3tZP8"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": "localhost:8088/api/loans/2"
+					},
+					"response": []
+				},
+				{
+					"name": "View Loan",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODgvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2OTQ5MzQ3MjcsImV4cCI6MTY5NTAyMTEyNywibmJmIjoxNjk0OTM0NzI3LCJqdGkiOiI3cEs5ODd3QjhrSDZneXBSIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.vXa7quojBVzVJ7PQRW_hTPCdM89FWa0-9h91zzfgZ80"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": "localhost:8088/api/loans/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Repayment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODgvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2OTQ5NTUyNTIsImV4cCI6MTY5NTA0MTY1MiwibmJmIjoxNjk0OTU1MjUyLCJqdGkiOiJFYldXVWtmNGZLNGhrOGxEIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.d_clCuaMm5iH9mYHVc6L8Mt02CLjRTHRbMHq9tZQOlY"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "amount",
+									"value": "35000",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": "localhost:8088/api/repayments/6"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
