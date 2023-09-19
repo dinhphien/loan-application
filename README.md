@@ -21,6 +21,15 @@ $ make install
 $ make startup
 ```
 
+> **_Note:_** Common issues you might encounter:
+> 
+> 1. SQLSTATE[HY000] [2002] Connection refused: This is because the database is not ready to handle
+> connection. You need to increase interval time for heathcheck in docker-compose.yml file
+> 
+> 2. The stream or file "/mnt/code/storage/logs/laravel.log" could not be opened in append mode. This is the issue 
+> with file permissions between container and host user. You need to update USER_ID, GROUP_ID in docker-compose.yml file
+> to be your current host user id and group id.
+>
 ## Testing
 There is a postman collection in postman folder which can be imported into Postman application, 
 so you can test this application via Postman.
@@ -30,10 +39,10 @@ preconfigured users which are phien@gmail.com/phien (customer user) and admin@gm
 
 ## Architecture
 The app service is built using Laravel framework with MVC architectural pattern.
-Two additional layers: Service layer and Domain layer are added for clear and separation.
-Instead of messing up Controller layer with business logic.
+Two additional layers: Service layer and Domain layer are added between Controller and Model layers to handle business
+logic for clarity and separation, rather than messing up the logic in either Controller or Model.
 
 In Service layer, Publish/Subscribe pattern is applied to decouple the main workflow from other flows that act upon that.
 
-## Quality tools
+## Code Quality
 To ensure quality code of this project, Pint and Phpstan are used for code style fixer and static code analysis.

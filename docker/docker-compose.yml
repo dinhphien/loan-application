@@ -15,6 +15,9 @@ services:
 
   app:
     build:
+      args:
+          USER_ID: 1000
+          GROUP_ID: 1000
       context: ../
       dockerfile: docker/php-fpm/Dockerfile
       target: build-dev

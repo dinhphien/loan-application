@@ -1,4 +1,7 @@
 FROM php:8.2-fpm AS build-base
+
+ARG USER_ID
+ARG GROUP_ID
 ##
 # install needed php packages
 RUN apt-get update  \
@@ -23,9 +26,9 @@ FROM build-base AS build-dev
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
-# update user www-data with userid = 1000 and groupid = 1000
-RUN usermod -u 1000 www-data \
-    && groupmod -g 1000 www-data
+# update user www-data with host's user_id and group_id
+RUN usermod -u $USER_ID www-data \
+    && groupmod -g $GROUP_ID www-data
 USER www-data
 
 COPY docker/php-fpm/custom-xdebug.ini /usr/local/etc/php/conf.d/custom-xdebug.ini
